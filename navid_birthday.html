@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نوید تولدت مبارک رفیق!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Vazirmatn', sans-serif;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      color: white;
+      background: black;
+      position: relative;
+    }
+
+    video#bgvid {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      filter: brightness(0.6) saturate(1.2);
+    }
+
+    .heart {
+      position: fixed;
+      width: 30px;
+      height: 30px;
+      background: url('https://cdn-icons-png.flaticon.com/512/833/833472.png') no-repeat center;
+      background-size: contain;
+      animation: float 6s infinite;
+      z-index: 1;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+      100% { transform: translateY(-10vh) scale(1.2); opacity: 1; }
+    }
+
+    .container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      padding: 20px;
+      z-index: 2;
+    }
+
+    h1 {
+      font-size: 3rem;
+      text-shadow: 0 0 20px #ff007f, 0 0 40px #ff007f;
+      animation: neonGlow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes neonGlow {
+      from { text-shadow: 0 0 10px #ff007f; }
+      to { text-shadow: 0 0 40px #ff007f; }
+    }
+
+    .typed {
+      margin-top: 20px;
+      font-size: 1.3rem;
+      line-height: 2.1rem;
+      text-shadow: 0 0 10px rgba(255,255,255,0.4);
+      min-height: 3rem;
+    }
+
+    .corner-note {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 6px 12px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      backdrop-filter: blur(4px);
+      z-index: 3;
+    }
+
+    .final-message {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255,255,255,0.95), rgba(255,0,150,0.8));
+      color: #111;
+      font-size: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 2s ease-in-out;
+      z-index: 10;
+    }
+
+    .final-message.show {
+      opacity: 1;
+      pointer-events: auto;
+      animation: explode 2s ease-in-out forwards;
+    }
+
+    @keyframes explode {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <video id="bgvid" autoplay muted loop>
+    <source src="https://cdn.pixabay.com/video/2023/06/12/169687-832510866_large.mp4" type="video/mp4">
+  </video>
+
+  <!-- Floating Hearts -->
+  <script>
+    for (let i = 0; i < 20; i++) {
+      let heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDelay = Math.random() * 5 + 's';
+      document.body.appendChild(heart);
+    }
+  </script>
+
+  <div class="container">
+    <h1>نوید عشقم تولدت مبارک 🎉</h1>
+    <div class="typed" id="typed"></div>
+  </div>
+
+  <div class="corner-note">تا آخرش وایسا، یه چیز خفن تهشه 😏</div>
+
+  <div class="final-message" id="final">
+    داداش نوید... ❤️ <br>
+    بدون که یه رفیق مثه حسین تا تهش پشته‌ته 💪🔥<br>
+    تولدت مبارک عشق دلم! 😍
+  </div>
+
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/10/05/audio_4c0277d0c8.mp3?filename=summer-dance-party-118984.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const msgs = [
+      "نوید جان، امروز فقط مال توئه 🎈",
+      "این زندگی بدون رفیقایی مث تو هیچه...",
+      "با تو رفاقت یعنی حال خوب هر روز! 😎",
+      "تولدت مبارک، از طرف حسین  💯",
+      "وایسا... هنوز تموم نشده... 😏"
+    ];
+
+    let i = 0, j = 0;
+    const el = document.getElementById("typed");
+
+    function type() {
+      if (i < msgs.length) {
+        if (j < msgs[i].length) {
+          el.textContent += msgs[i][j++];
+          setTimeout(type, 25);
+        } else {
+          setTimeout(() => {
+            el.textContent = "";
+            j = 0;
+            i++;
+            type();
+          }, 1200);
+        }
+      } else {
+        document.getElementById("final").classList.add("show");
+      }
+    }
+
+    type();
+  </script>
+</body>
+</html>
